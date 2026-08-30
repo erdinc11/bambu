@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Bambu Studio / Sosyal medya yönetimi, web sitesi ve reklam</title>
+<meta name="description" content="Aylık 1.099 TL'den başlayan sosyal medya paketleri. Videoları yapay zekayla üretiyoruz, sizin hesabınızdan biz paylaşıyoruz. Web sitesi ve reklam yönetimi de bizde.">
+<link rel="stylesheet" href="assets/fonts/fonts.css">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip" href="#detay">İçeriğe geç</a>
+
+<main>
+  <!-- ============ SABITLENMIS HIKAYE SAHNESI ============ -->
+  <div class="track" id="track">
+    <div class="stage" id="stage">
+
+      <div class="media">
+        <video id="hero" class="hero-video" src="assets/hero-scrub.mp4"
+               poster="assets/hero-poster.jpg" muted playsinline preload="auto"
+               disablepictureinpicture aria-hidden="true" tabindex="-1"></video>
+        <img class="hero-still" src="assets/hero-poster.jpg" alt="">
+      </div>
+
+      <!-- Scrim katmani. Tipografinin ALTINDA durur, aksi halde dev tipografiyi
+           yikar. Sadece acik perdelerde, metnin oturdugu koseleri hedefler. -->
+      <div class="scrimlayer" aria-hidden="true">
+        <div class="beat sc sc1" data-start="0"    data-end="5.4"></div>
+        <div class="beat sc sc2" data-start="6.4"  data-end="13.2"></div>
+        <div class="beat sc sc4" data-start="21.4" data-end="24"></div>
+      </div>
+
+      <!-- Dev tipografi katmani. Video ile carpim karisiminda, ozne onu keser. -->
+      <div class="typelayer" aria-hidden="true">
+        <div class="beat type-1" data-start="0" data-end="5.4">
+          <span class="giant giant-bambu">BAMBU</span>
+          <span class="giant giant-studio">STUDIO</span>
+        </div>
+        <div class="beat type-4" data-start="21.4" data-end="24">
+          <span class="giant">BAMBU</span>
+        </div>
+      </div>
+
+      <!-- Okunabilir UI katmani -->
+      <div class="ui">
+
+        <!-- S1 : 0.00 - 5.40 -->
+        <section class="beat s1" data-start="0" data-end="5.4" aria-labelledby="s1h">
+          <p class="mark">BAMBU STUDIO</p>
+          <div class="block">
+            <p class="lbl">01 / GÖRÜNÜRLÜK</p>
+            <h2 id="s1h" class="h-mini">Şu anda kimse sizi göremiyor.</h2>
+            <p class="body">Son paylaşımınızın üstünden kaç hafta geçti. Rakibiniz her gün paylaşıyor, siz üç ay önce durdunuz.</p>
+          </div>
+          <div class="block">
+            <p class="lbl">FARK YARATAN</p>
+            <p class="body">Bütçe değil, düzen.</p>
+          </div>
+        </section>
+
+        <!-- S2 : 6.40 - 13.60 -->
+        <section class="beat s2" data-start="6.4" data-end="13.2" aria-labelledby="s2h">
+          <div class="topbar">
+            <p class="lbl">02 / KAPSAM</p>
+            <h2 id="s2h" class="h-mini">Bir gövde, beş iş. Hepsinin üretimi, metni ve yayını bize ait.</h2>
+          </div>
+          <div class="leaders" data-start="9.6" data-end="13.2">
+            <div class="leader" style="--x:17%"><span class="rot">WEB</span></div>
+            <div class="leader" style="--x:35%"><span class="rot">GÖRSEL</span></div>
+            <div class="leader" style="--x:51%"><span class="rot">SOSYAL MEDYA</span></div>
+            <div class="leader" style="--x:68%"><span class="rot">VİDEO</span></div>
+            <div class="leader" style="--x:84%"><span class="rot">REKLAM</span></div>
+          </div>
+        </section>
+
+        <!-- S3a : 14.00 - 16.40 -->
+        <section class="beat s3a" data-start="14.6" data-end="16.3" aria-labelledby="s3ah">
+          <div class="topbar">
+            <p class="lbl">03 / YÖNTEM</p>
+            <h2 id="s3ah" class="h-mini">Set kurmuyoruz. Oyuncu tutmuyoruz. Ekip çıkarmıyoruz.</h2>
+          </div>
+          <div class="botbar">
+            <p class="body wide">Maliyetin düştüğü yer burası. Kalitenin düşmediği yer de burası, çünkü her kareyi biz seçiyoruz.</p>
+          </div>
+        </section>
+
+        <!-- S3b : 16.60 - 18.20 -->
+        <section class="beat s3b" data-start="16.7" data-end="18.2" aria-labelledby="s3bh">
+          <h2 id="s3bh" class="stack">
+            <span class="giant-sm muted">YAPAY ZEKA</span>
+            <span class="giant giant-bright">ÜRETİMİ</span>
+          </h2>
+          <div class="specbar">
+            <p class="spec"><span class="lbl">TESLİM</span><span class="spec-v">48 saat</span></p>
+            <p class="spec"><span class="lbl">REVİZYON</span><span class="spec-v">paylaşımdan önce</span></p>
+            <p class="spec"><span class="lbl">ONAY</span><span class="spec-v">her içerik size düşer</span></p>
+          </div>
+        </section>
+
+        <!-- S4b : 20.60 - 24.00 -->
+        <section class="beat s4" data-start="21.4" data-end="24" aria-labelledby="s4h">
+          <div class="topbar left">
+            <p class="lbl">04 / PAKETLER</p>
+            <h2 id="s4h" class="h-mini">Üç boy. Ne sıklıkta paylaşacağınıza siz karar verirsiniz.</h2>
+          </div>
+
+          <ul class="picker" id="picker">
+            <li><button type="button" class="pk is-on" data-pk="filiz" aria-pressed="true">
+              <span class="pk-n">FİLİZ</span><span class="pk-p">1.099 ₺</span></button></li>
+            <li><button type="button" class="pk" data-pk="govde" aria-pressed="false">
+              <span class="pk-n">GÖVDE</span><span class="pk-p">1.999 ₺</span></button></li>
+            <li><button type="button" class="pk" data-pk="orman" aria-pressed="false">
+              <span class="pk-n">ORMAN</span><span class="pk-p">3.499 ₺</span></button></li>
+          </ul>
+
+          <div class="detail" id="detail">
+            <div class="pkd is-on" data-pk="filiz">
+              <p class="lbl">FİLİZ / AYLIK 1.099 ₺</p>
+              <p class="body">Haftada 2 video, 4 görsel. Ayda 8 video, 16 görsel eder.</p>
+              <p class="body">Post, reels veya story. 1 platform. Paylaşım takvimi önden yazılı verilir.</p>
+            </div>
+            <div class="pkd" data-pk="govde">
+              <p class="lbl">GÖVDE / AYLIK 1.999 ₺</p>
+              <p class="body">Haftada 4 video, 7 görsel. Ayda 16 video, 28 görsel eder.</p>
+              <p class="body">2 platform, çapraz yayın dahil. Aylık performans özeti.</p>
+            </div>
+            <div class="pkd" data-pk="orman">
+              <p class="lbl">ORMAN / AYLIK 3.499 ₺</p>
+              <p class="body">Haftada 7 video, 12 görsel. Ayda 28 video, 48 görsel eder.</p>
+              <p class="body">Her gün en az bir paylaşım. 3 platform. Öncelikli revizyon ve aylık strateji görüşmesi.</p>
+            </div>
+            <a class="badge" id="cta" href="#" rel="noopener">
+              <span class="b1">PAKETİ</span> <span class="b2">SEÇ</span>
+            </a>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ SABIT SAHNE SONRASI NORMAL AKIS ============ -->
+  <div id="detay" class="after">
+
+    <section class="sec" aria-labelledby="ads">
+      <div class="sec-head">
+        <h2 id="ads" class="h-big">REKLAM<span class="ind">YÖNETİMİ</span></h2>
+        <p class="lede">Paketler organik paylaşımı kapsar. Reklam bunun dışındadır ve tek başına da alınabilir.</p>
+      </div>
+      <div class="cols">
+        <div class="block"><p class="lbl">BİZE AİT OLAN</p>
+          <p class="body">Reklam görselleri, reklam videoları, metinler, hedef kitle kurulumu ve günlük optimizasyon.</p></div>
+        <div class="block"><p class="lbl">RAPOR</p>
+          <p class="body">Haftada bir gün, sabit günde. Neyin ne kadara dönüştüğü rakamla yazılı gelir.</p></div>
+        <div class="block"><p class="lbl">ÜCRET</p>
+          <p class="body">Aylık 2.499 ₺. Aylık reklam bütçesi 20.000 ₺ üstündeyse bütçenin %12'si.</p></div>
+        <div class="block"><p class="lbl">BÜTÇE</p>
+          <p class="body">Reklam bütçesi ayrıdır ve doğrudan platforma ödenir. Bize geçmez.</p></div>
+      </div>
+    </section>
+
+    <section class="sec" aria-labelledby="web">
+      <div class="sec-head">
+        <h2 id="web" class="h-big">WEB<span class="ind">SİTESİ</span></h2>
+        <p class="lede">Ne istediğinizi anlatırsınız. Tasarlar, yazar, kurar ve yayına alırız. Siz sadece onaylarsınız.</p>
+      </div>
+      <ul class="price">
+        <li><span class="p-n">Tek sayfa tanıtım sitesi</span><span class="p-v">4.900 ₺'den</span></li>
+        <li><span class="p-n">Çok sayfalı kurumsal site</span><span class="p-v">9.900 ₺'den</span></li>
+        <li><span class="p-n">E-ticaret ve özel geliştirme</span><span class="p-v">kapsama göre</span></li>
+      </ul>
+      <p class="note">Her işte alan adı yönlendirmesi, hosting kurulumu ve mobil uyum dahildir.</p>
+    </section>
+
+    <section class="sec" aria-labelledby="sur">
+      <div class="sec-head">
+        <h2 id="sur" class="h-big">ÖDEDİKTEN<span class="ind">SONRA</span></h2>
+        <p class="lede">En sık duyduğumuz korku, para alındıktan sonra kimsenin telefonu açmaması. Ne olacağını önden yazıyoruz.</p>
+      </div>
+      <ol class="steps">
+        <li><span class="st-n">01</span><p class="body">WhatsApp'tan yazarsınız. Aynı gün cevap alırsınız.</p></li>
+        <li><span class="st-n">02</span><p class="body">Hesabınıza bakar, hangi paketin yeteceğini söyleriz. Gerekmiyorsa üst paketi önermeyiz.</p></li>
+        <li><span class="st-n">03</span><p class="body">Başlamadan önce o ayın paylaşım takvimini görürsünüz. Ne gün ne paylaşılacak, yazılı.</p></li>
+        <li><span class="st-n">04</span><p class="body">İçerikler paylaşılmadan önce onayınıza düşer.</p></li>
+        <li><span class="st-n">05</span><p class="body">Aynı kişiyle devam edersiniz. Her hafta ulaşabileceğiniz tek bir numara.</p></li>
+        <li><span class="st-n">06</span><p class="body">İptal ederseniz ay sonunda biter. Taahhüt yok.</p></li>
+      </ol>
+    </section>
+
+    <section class="sec" aria-labelledby="sss">
+      <div class="sec-head">
+        <h2 id="sss" class="h-big">SIK<span class="ind">SORULAN</span></h2>
+      </div>
+      <div class="faq">
+        <details><summary>Bu fiyata nasıl oluyor?</summary>
+          <p class="body">Videoları yapay zekayla üretiyoruz. Set ve ekip maliyeti yok. Kurgu ve seçim insan işi, o kısımda kısıntı yok.</p></details>
+        <details><summary>Hesabımın şifresini vermek zorunda mıyım?</summary>
+          <p class="body">Hayır. Meta Business üzerinden yetki vererek de çalışabiliriz.</p></details>
+        <details><summary>İçerikleri beğenmezsem?</summary>
+          <p class="body">Paylaşımdan önce onayınıza düşer. Beğenmediğinizi değiştiririz.</p></details>
+        <details><summary>Reklam bütçesi pakete dahil mi?</summary>
+          <p class="body">Değil. Reklam ayrı bir hizmet, bütçe de ayrı ve doğrudan platforma ödenir.</p></details>
+        <details><summary>Kaç ay taahhüt var?</summary>
+          <p class="body">Yok. Aylık ilerler.</p></details>
+      </div>
+    </section>
+
+    <section class="sec end" aria-labelledby="cta2">
+      <div class="sec-head">
+        <h2 id="cta2" class="h-big">MARKANIZ<span class="ind">BÜYÜSÜN</span></h2>
+        <p class="lede">Paketinizi seçin, aynı gün başlayalım.</p>
+      </div>
+      <a class="badge big" id="cta2link" href="#" rel="noopener"><span class="b1">WHATSAPP'TAN</span> <span class="b2">YAZ</span></a>
+    </section>
+
+    <footer class="foot">
+      <p class="lbl">BAMBU STUDIO</p>
+      <p class="body">Sosyal medya yönetimi, yapay zeka video üretimi, web sitesi ve reklam yönetimi.</p>
+      <a class="lbl tel" id="telline" href="#">WHATSAPP / NUMARA EKLENECEK</a>
+    </footer>
+  </div>
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>

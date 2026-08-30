@@ -1,0 +1,318 @@
+/* Bambu Studio — izole ozne dilbilgisi
+   Guvenli bolgeler .10k-flow/design-package.md Bolum 9'daki olculmus
+   kesisim haritalarindan alinmistir. Hicbir konum tahminle konmamistir. */
+
+:root{
+  --bg-light:#EDECEA; --bg-mid:#B9B9B6; --bg-dark:#08090A;
+  --ink:#111312; --ink-inv:#F4F3F0; --label:#63635F;
+  --rule:17,19,18; --champ:#B08D57;
+  --pps:380px;                 /* video saniyesi basina scroll mesafesi */
+  --disp:'Archivo',ui-sans-serif,system-ui,sans-serif;
+  --body:'Inter Tight',ui-sans-serif,system-ui,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  --inset:4vw;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg-light);color:var(--ink);
+  font-family:var(--body);font-size:16px;line-height:1.45;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden}
+img,video{display:block;max-width:100%}
+h1,h2,h3,p,ul,ol,figure{margin:0}
+ul,ol{list-style:none;padding:0}
+
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.skip{position:absolute;left:-9999px;top:0;z-index:99;background:var(--ink);color:var(--ink-inv);
+  display:grid;place-items:center;min-height:48px;padding:0 22px;
+  font:500 12px/1 var(--mono);letter-spacing:.08em}
+.skip:focus{left:0}
+:focus-visible{outline:1px solid var(--champ);outline-offset:4px}
+
+/* ---------- TERS RENK KATMANI ----------
+   Okunabilir her metin difference karisimiyla ciziliyor: arkasinda ne varsa
+   onun tam tersi renkte gorunur. Acik fonda koyu, koyu oznenin uzerinde acik.
+   Bilinen kor nokta: arka plan orta griye yakinsa tersi de orta gri cikar.
+   Onu asagidaki scrimler arka plani orta griden uzaga iterek kapatir.
+   Dev gorüntü tipografisi de ayni kuralla oznenin uzerinde okunur kalir. */
+.ui .beat{mix-blend-mode:difference;color:#fff}
+
+/* ---------- ortak metin birimleri (dilbilgisi B3) ---------- */
+.lbl{font:500 13px/1.5 var(--mono);letter-spacing:.14em;color:var(--label);
+  text-transform:uppercase;margin-bottom:7px}
+.body{font:400 16px/1.68 var(--body);color:var(--ink);max-width:34ch}
+.body.wide{max-width:60ch}
+.h-mini{font:400 17px/1.62 var(--body);color:var(--ink);max-width:34ch;letter-spacing:-.005em}
+/* Sahne icinde renkler ters karisim icin acik uca cekilir */
+.ui .body,.ui .h-mini,.ui .spec,.ui .rot,.ui .mark,.ui .pk-n{color:#fff}
+/* Difference altinda acik gri arka plana yaklasip kaybolabiliyor.
+   Tum sahne metni beyaz, vurgu farki boyut ve harf araligindan gelir. */
+.ui .lbl,.ui .pk-p,.ui .spec .lbl{color:#fff}
+.block+.block{margin-top:26px}
+
+/* ---------- SAHNE ---------- */
+.track{position:relative;height:calc(24 * var(--pps) + 100vh)}
+.stage{position:sticky;top:0;height:100vh;overflow:hidden;isolation:isolate;
+  background:var(--bg-light)}
+/* isolation, icerideki video z-indexlerini .media icinde tutar; aksi halde
+   video ust seviyeye cikip typelayer ve ui katmanlarinin ustune biner. */
+.media{position:absolute;inset:0;isolation:isolate}
+.hero-video,.hero-still{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero-still{z-index:0}
+.hero-video{z-index:1;opacity:0;transition:opacity .5s ease}
+.stage.ready .hero-video{opacity:1}
+.stage.dead .hero-video{display:none}
+
+/* Dev tipografi: arkasindaki videoyu tersine cevirerek her zeminde okunur. */
+/* z-index yok. Boyama sirasini DOM sirasi belirler: media, typelayer, ui.
+   Boylece .ui kendi yigin baglamini yaratmaz ve icindeki difference
+   karisimi videoya kadar ulasabilir. */
+.typelayer{position:absolute;inset:0;mix-blend-mode:difference;color:#fff;pointer-events:none}
+.typelayer .giant{color:#fff}
+.ui{position:absolute;inset:0}
+
+/* Gorunurluk ve opaklik scroll'dan hesaplanir, zamandan degil.
+   Boylece hizli scroll'da bile iki sahne asla ayni anda gorunmez. */
+.beat{position:absolute;inset:0;visibility:hidden;opacity:0;
+  transform:translateY(calc((1 - var(--op,0)) * 14px))}
+
+.giant{font-family:var(--disp);font-weight:300;font-size:12vw;line-height:.96;
+  letter-spacing:.02em;color:var(--ink);white-space:nowrap;display:block}
+.giant-sm{font-family:var(--disp);font-weight:300;font-size:3.4vw;line-height:1.3;
+  letter-spacing:.3em;display:block;margin-right:-.3em}
+.muted{color:#6f6f6c}
+.giant-bright{color:var(--ink-inv)}
+
+/* --- type beat konumlari, olculmus --- */
+.type-1 .giant-bambu,.type-1 .giant-studio{position:absolute}
+.type-1 .giant{font-size:9vw}
+.type-1 .giant-bambu,.type-1 .giant-studio{top:50%;transform:translateY(-50%)}
+.type-1 .giant-bambu{left:var(--inset)}
+.type-1 .giant-studio{right:var(--inset)}
+.type-4{display:flex;align-items:center;justify-content:center}
+.type-4 .giant{font-size:25vw}
+/* S3b siyah akt: karisimi ekrana cevir, harf acik olsun */
+/* S3b yigini: satir 7 sag yarisi ve satir 8 olculmus bos, saga hizalanir */
+.s3b .stack{position:absolute;right:var(--inset);bottom:3vh;left:auto;
+  display:flex;flex-direction:column;align-items:flex-end;text-align:right}
+.s3b .giant{font-size:10vw}
+.s3b .giant-sm{font-size:2.4vw;letter-spacing:.34em;margin-right:-.34em;
+  transform:translateY(-.35em)}
+
+/* ---------- S1 : sol sutun x 0-25% olculmus bos ---------- */
+.s1{padding:var(--inset)}
+.s1 .mark{position:absolute;top:var(--inset);left:var(--inset);
+  font:500 13px/1.4 var(--mono);letter-spacing:.28em;color:var(--ink)}
+/* Bloklar dev tipografinin bandindan uzakta, sol alt kosede.
+   Olculen guvenli bolge sol sutun x 0-25%, tum satirlar. */
+.s1 .block{position:absolute;left:var(--inset);width:19%;min-width:210px;max-width:270px}
+.s1 .block:nth-of-type(1){bottom:22vh}
+.s1 .block:nth-of-type(2){bottom:7vh}
+.s1 .block+.block{margin-top:0}
+
+/* ---------- S2 : ust satir y 0-11%, alt satir y 78-100% ---------- */
+.topbar{position:absolute;top:var(--inset);left:var(--inset);right:var(--inset);
+  display:flex;gap:28px;align-items:baseline}
+.topbar .h-mini{max-width:46ch}
+.topbar.left{max-width:52%}
+.leaders{position:absolute;left:0;right:0;bottom:0;height:26%}
+.leader{position:absolute;left:var(--x);bottom:0;height:100%;
+  display:flex;flex-direction:column;align-items:center;justify-content:flex-end}
+.leader::before{content:"";width:1px;flex:1;background:rgba(255,255,255,.58)}
+.leader .rot{writing-mode:vertical-rl;transform:rotate(180deg);
+  font:500 12px/1.35 var(--mono);letter-spacing:.16em;color:var(--ink);
+  padding:8px 0 0;white-space:nowrap}
+
+/* Scrimler ters karisimi calisir kilar.
+   Ters karisimin kor noktasi orta gridir: arka plan luma 128 civarindaysa
+   tersi de orta gri cikar ve metin kaybolur. Olculen kor nokta bolgeleri:
+   S2 bantlari 124-129, S4 ust bar 139, S4 secici 168, S4 detay 173.
+   Bu scrimler o bolgeleri acik uca iter, boylece inversiyon her zaman koyu
+   metin uretir. Karanlik perdelerde scrim yoktur, orada inversiyon 20:1 verir.
+   Katman dev tipografinin ALTINDADIR, aksi halde onu yikar. */
+.scrimlayer{position:absolute;inset:0;pointer-events:none}
+.sc{position:absolute;inset:0}
+
+.sc1{background:
+  radial-gradient(46% 26% at 6% 76%,rgba(237,236,234,.94),rgba(237,236,234,0) 72%),
+  radial-gradient(34% 16% at 5% 8%, rgba(237,236,234,.94),rgba(237,236,234,0) 74%)}
+
+.sc2{background:
+  linear-gradient(to bottom,rgba(237,236,234,.92) 0,rgba(237,236,234,.92) 11%,rgba(237,236,234,0) 36%),
+  linear-gradient(to top,  rgba(237,236,234,.92) 0,rgba(237,236,234,.92) 13%,rgba(237,236,234,0) 38%)}
+
+.sc4{background:
+  radial-gradient(30% 24% at 4% 84%, rgba(237,236,234,.94),rgba(237,236,234,0) 72%),
+  radial-gradient(32% 28% at 97% 80%,rgba(237,236,234,.94),rgba(237,236,234,0) 72%),
+  radial-gradient(30% 18% at 4% 9%,  rgba(237,236,234,.94),rgba(237,236,234,0) 74%)}
+
+
+/* ---------- S3a : siyah fon, acik metin. Olculen kontrast 18.3 ---------- */
+.s3a .lbl{color:#8f8f8a}
+.s3a .h-mini,.s3a .body{color:var(--ink-inv)}
+.botbar{position:absolute;left:var(--inset);right:var(--inset);bottom:var(--inset)}
+
+/* ---------- S3b : ust satir y 0-11% olculmus bos ---------- */
+.s3b{color:var(--ink-inv)}
+.specbar{position:absolute;top:var(--inset);left:var(--inset);right:var(--inset);
+  display:flex;gap:52px;flex-wrap:wrap}
+.spec{font:400 15px/1.6 var(--body);color:var(--ink-inv)}
+.spec .lbl{display:block;color:#7d7d79;margin-bottom:4px}
+
+/* ---------- S4b : sol x 0-19%, sag x 81-100% olculmus bos ---------- */
+.s4 .topbar.left{top:var(--inset);left:var(--inset);right:auto;
+  flex-direction:column;gap:8px;width:23%}
+/* Dev tipografi bandinin ALTINA. Olculen guvenli sutun x 0-19%, tum satirlar. */
+.picker{position:absolute;left:var(--inset);bottom:3vh;width:15%;min-width:190px}
+.pk{display:flex;flex-direction:column;gap:2px;width:100%;text-align:left;
+  background:none;border:0;border-top:1px solid rgba(255,255,255,.28);
+  padding:11px 0;cursor:pointer;color:var(--ink);font-family:var(--body)}
+.picker li:last-child .pk{border-bottom:1px solid rgba(255,255,255,.28)}
+.pk-n{font:500 14px/1.35 var(--mono);letter-spacing:.16em}
+.pk-p{font:400 15px/1.4 var(--body);color:var(--label)}
+.pk.is-on{border-top-color:#fff;border-top-width:2px;padding-top:10px}
+.ui .pk.is-on .pk-p{color:#fff}
+
+/* Olculen guvenli sutun x 81-100%, tum satirlar. Dev tipografinin altina indirildi. */
+.detail{position:absolute;right:var(--inset);bottom:1vh;width:15%;min-width:200px;max-width:250px}
+.pkd{display:none}
+.pkd.is-on{display:block}
+.pkd .body+.body{margin-top:10px}
+.detail .lbl{font-size:11px;letter-spacing:.10em;white-space:nowrap}
+
+/* Difference yalnizca sahnede bir kez calisir; tum kaynak renkler saf beyazdir. */
+.ui .beat .mark,.ui .beat .lbl,.ui .beat .body,.ui .beat .h-mini,
+.ui .beat .rot,.ui .beat .spec-v,.ui .beat .stack span,
+.ui .beat .pk,.ui .beat .pk-n,.ui .beat .pk-p,.ui .beat .badge{color:#fff}
+.ui .beat .badge{border-color:rgba(255,255,255,.62)}
+.ui .beat .badge:hover{border-color:#fff;color:#fff}
+.s4 .badge{width:100%;height:44px;margin-top:14px;border-radius:0;flex-direction:row;gap:.45em}
+.s4 .badge .b1,.s4 .badge .b2{display:inline}
+
+/* daire rozet, dilbilgisi B5 : sitedeki tek cagri bicimi */
+.badge{display:flex;flex-direction:column;align-items:center;justify-content:center;
+  width:62px;height:62px;border-radius:50%;
+  border:1px solid rgba(var(--rule),.45);color:var(--ink);text-decoration:none;
+  font:500 11px/1.5 var(--mono);letter-spacing:.12em;text-align:center;
+  margin-top:26px;transition:border-color .25s,color .25s,transform .25s}
+.badge:hover{border-color:var(--champ);color:var(--champ);transform:scale(1.05)}
+.badge .b1,.badge .b2{display:block}
+
+/* Sayfa sonu: genis, tipografik ve tek hareketli WhatsApp cagrisi. */
+#cta2link{position:relative;display:inline-flex;width:min(100%,820px);min-height:92px;height:auto;
+  margin:42px auto 0;padding:20px 96px 20px 32px;overflow:hidden;
+  border:1px solid rgba(176,141,87,.52);border-radius:3px;
+  background:linear-gradient(110deg,#08090a 0 38%,#2a2115 50%,#08090a 62%);
+  background-size:240% 100%;box-shadow:inset 0 0 0 1px rgba(255,255,255,.06),0 18px 42px rgba(8,9,10,.12);
+  color:var(--ink-inv);font:500 clamp(13px,1.2vw,17px)/1 var(--mono);
+  text-transform:uppercase;letter-spacing:.18em;justify-content:center;gap:.5em;
+  animation:cta-sweep 4.8s ease-in-out infinite}
+#cta2link::before{content:"DIRECT LINE  ·  WA";position:absolute;left:18px;top:11px;
+  color:rgba(244,243,240,.48);font:500 8px/1 var(--mono);letter-spacing:.16em}
+#cta2link .b1,#cta2link .b2{display:inline}
+#cta2link::after{content:"WA  ↗";position:absolute;right:18px;top:50%;width:60px;height:60px;
+  display:grid;place-items:center;border-radius:50%;background:var(--champ);color:var(--bg-dark);
+  font:500 10px/1 var(--mono);letter-spacing:.04em;transform:translateY(-50%);transition:transform .3s ease}
+#cta2link:hover{border-color:var(--champ);color:#fff;transform:translateY(-3px)}
+#cta2link:hover::after{transform:translateY(-50%) rotate(45deg) scale(1.08)}
+@keyframes cta-sweep{0%,30%{background-position:100% 0}70%,100%{background-position:0 0}}
+
+/* ---------- SABIT SAHNE SONRASI ---------- */
+.after{background:var(--bg-light);padding:0 var(--inset) 0}
+.sec{padding:16vh 0;border-top:1px solid rgba(var(--rule),.10);position:relative}
+.sec:first-child{border-top:0}
+.sec-head{text-align:center;margin-bottom:9vh}
+.h-big{font-family:var(--disp);font-weight:300;font-size:clamp(38px,7.4vw,116px);
+  line-height:1.04;letter-spacing:.03em;color:var(--ink)}
+.h-big .ind{display:block;padding-left:.16em;color:#5d5f5c}
+.lede{margin:26px auto 0;max-width:52ch;font:400 17px/1.68 var(--body);color:#3c3e3c}
+
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:44px 40px;max-width:1180px;margin:0 auto}
+.price{max-width:820px;margin:0 auto}
+.price li{display:flex;justify-content:space-between;gap:20px;align-items:baseline;
+  padding:20px 0;border-top:1px solid rgba(var(--rule),.12)}
+.price li:last-child{border-bottom:1px solid rgba(var(--rule),.12)}
+.p-n{font:400 16px/1.45 var(--body)}
+.p-v{font:500 15px/1 var(--mono);letter-spacing:.08em;color:var(--label);white-space:nowrap}
+.note{max-width:820px;margin:22px auto 0;font:400 15px/1.5 var(--body);color:var(--label)}
+
+.steps{max-width:900px;margin:0 auto;display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:38px 44px}
+.steps li{display:flex;gap:16px;align-items:flex-start}
+.st-n{font:500 13px/1.7 var(--mono);letter-spacing:.12em;color:var(--champ);flex:none}
+
+.faq{max-width:820px;margin:0 auto}
+.faq details{border-top:1px solid rgba(var(--rule),.12)}
+.faq details:last-child{border-bottom:1px solid rgba(var(--rule),.12)}
+.faq summary{list-style:none;cursor:pointer;padding:20px 0;
+  font:400 16px/1.5 var(--body);display:flex;justify-content:space-between;gap:20px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-family:var(--mono);color:var(--label);flex:none}
+.faq details[open] summary::after{content:"−"}
+.faq details p{padding:0 0 22px;max-width:60ch}
+
+.end{text-align:center}
+.endshot{width:100%;max-width:1180px;margin:0 auto 9vh;height:auto}
+.foot{padding:9vh 0 7vh;border-top:1px solid rgba(var(--rule),.10);
+  display:flex;flex-direction:column;gap:10px;align-items:flex-start}
+.foot .tel{color:var(--champ)}
+
+/* ---------- MOBIL VE AZALTILMIS HAREKET : tam statik akis ---------- */
+@media (max-width:960px),(prefers-reduced-motion:reduce),(pointer:coarse){
+  .track{height:auto}
+  .stage{position:static;height:auto;overflow:visible;padding-bottom:0}
+  .media{position:relative;inset:auto;height:62vh;min-height:340px}
+  .hero-video{display:none}
+  .typelayer{display:none}
+  .ui{position:static;inset:auto}
+  .beat{position:static;inset:auto;visibility:visible;opacity:1;transform:none;
+    padding:11vh var(--inset);
+    border-top:1px solid rgba(var(--rule),.10)}
+  .beat>*{transform:none}
+  .s1 .mark,.s1 .block,.topbar,.botbar,.specbar,.leaders,.leader,
+  .picker,.detail,.s4 .topbar.left,.s3b .stack{position:static;inset:auto;width:auto;
+    max-width:none;min-width:0;height:auto;margin:0}
+  .s1>.block:first-of-type{margin-top:0}
+  .s1 .mark{margin-bottom:26px}
+  .topbar{flex-direction:column;gap:10px;margin-bottom:30px}
+  .leaders{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px}
+  .leader{display:block;height:auto}
+  .leader::before{display:none}
+  .leader .rot{writing-mode:horizontal-tb;transform:none;padding:0;
+    display:block;padding:10px 0;border-top:1px solid rgba(var(--rule),.14)}
+  .axis,.scrimlayer{display:none}
+  /* Statik akista video yok, arka plan duz. Ters karisim kapatilir ve
+     renkler normal mürekkebe doner. */
+  .ui .beat{mix-blend-mode:normal}
+  .ui .body,.ui .h-mini,.ui .mark,.ui .pk-n{color:var(--ink)}
+  .ui .lbl,.ui .pk-p,.ui .pk.is-on .pk-p{color:var(--label)}
+  .s3a,.s3b{background:var(--bg-dark)}
+  .ui .s3a .h-mini,.ui .s3a .body,.ui .s3b .spec,.ui .s3b .body,
+  .ui .s3b .h-mini{color:var(--ink-inv)}
+  .ui .s3a .lbl,.ui .s3b .lbl,.ui .s3b .spec .lbl{color:#8f8f8a}
+  .ui .s3b .giant-bright{color:var(--ink-inv)}
+  .s3b{color:var(--ink-inv)}
+  .s3b .stack{align-items:flex-start;text-align:left;margin-bottom:26px}
+  .s3b .giant{font-size:13vw}
+  .s3b .giant-sm{font-size:4vw}
+  .s3b .spec,.s3b .body,.s3b .h-mini{color:var(--ink-inv)}
+  .specbar{flex-direction:column;gap:20px}
+  .picker{margin-bottom:30px}
+  .pkd{display:block;padding:20px 0;border-top:1px solid rgba(var(--rule),.14)}
+  .pk{pointer-events:none}
+  .pk,.picker li:last-child .pk{border-color:rgba(var(--rule),.16)}
+  .pk.is-on .pk-n{color:var(--ink)}
+  .badge{width:auto;height:auto;border-radius:999px;padding:16px 30px;
+    min-height:48px;place-items:center;display:inline-grid;font-size:11px}
+  .ui .beat .badge{border-color:rgba(var(--rule),.45);color:var(--ink)}
+  .badge .b1,.badge .b2{display:inline}
+  .badge.big{width:auto;height:auto;padding:20px 34px}
+  #cta2link{padding:30px 78px 20px 22px;min-height:82px}
+  #cta2link::before{left:22px;top:12px}
+  #cta2link::after{right:12px;width:52px;height:52px}
+  .sec{padding:11vh 0}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .badge,#cta2link{transition:none;animation:none}
+}

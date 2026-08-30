@@ -1,0 +1,72 @@
+{
+  "workflow": "10k-websites-flow",
+  "tier": 3,
+  "segment_count": 4,
+  "expected_segment": 4,
+  "accepted_segments": [
+    {
+      "number": 1,
+      "source": "segment-01-retry-01.mp4",
+      "end_frame": "segment-01-end.png",
+      "status": "accepted",
+      "note": "first attempt segment-01.mp4 rejected on motion gate and preserved"
+    },
+    {
+      "number": 2,
+      "source": "segment-02.mp4",
+      "end_frame": "segment-02-end.png",
+      "status": "accepted",
+      "note": "five components produced instead of six; part map remapped to five, analiz raporu folded into reklam yonetimi"
+    },
+    {
+      "number": 3,
+      "source": "segment-03.mp4",
+      "end_frame": "segment-03-end.png",
+      "status": "accepted"
+    },
+    {
+      "number": 4,
+      "source": "segment-04.mp4",
+      "end_frame": "segment-04-end.png",
+      "status": "accepted",
+      "note": "ring counts came out 2/2/3 not 2/4/7; ladder carried by height, node-count claim removed from copy"
+    }
+  ],
+  "start_frame": "start-frame.png",
+  "hero_object": "BOGUM",
+  "visual_grammar": ".claude/skills/10k-websites-flow/references/visual-grammar.md",
+  "last_end_frame": "segment-04-end.png",
+  "status": "ready",
+  "support_expected": 0,
+  "support_received": [],
+  "start_frame_accepted": {
+    "file": "start-frame.png",
+    "dimensions": "1672x941",
+    "checks": "passed all visual-grammar D5 checks"
+  },
+  "rejected": [
+    {
+      "file": "segment-01.mp4",
+      "reason": "motion gate fail: in-plane lean reads as tipping over, reproducible by a single CSS rotate; bore did not open in depth; object wanders; floor contact shadow violates A1",
+      "preserved": true
+    }
+  ],
+  "hero": {
+    "file": "assets/hero-scrub.mp4",
+    "duration": 24.0,
+    "frames": 576
+  },
+  "site": {
+    "files": [
+      "index.html",
+      "styles.css",
+      "script.js"
+    ],
+    "fonts": "assets/fonts (yerel woff2, latin+latin-ext)",
+    "verified": "Chrome 151 @ 1440x900,1920x1080,1024x700,390x844 + file://"
+  },
+  "open_items": [
+    "WhatsApp numarasi script.js icinde WA degiskeni, su an placeholder 905000000000",
+    "web sitesi fiyatlari varsayim: 4.900 / 9.900 / teklif"
+  ]
+}
